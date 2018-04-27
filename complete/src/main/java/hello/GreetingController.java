@@ -1,19 +1,31 @@
 package hello;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping(path="/api/v1")
 public class GreetingController {
+    @Autowired
+    private UserRepository userRepository;
 
-    private static final String template = "Hello, %s!";
-    private final AtomicLong counter = new AtomicLong();
 
-    @RequestMapping("/greeting")
-    public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
-        return new Greeting(counter.incrementAndGet(),
-                            String.format(template, name));
+
+    @GetMapping(path="/user/add") // Map ONLY GET Requests
+    public @ResponseBody
+    String addNewUser (@RequestParam String name
+            , @RequestParam String email) {
+        // @ResponseBody means the returned String is the response, not a view name
+        // @RequestParam means it is a parameter from the GET or POST request
+
+        User n = new User();
+        n.setName(name);
+        n.setEmail(email);
+        userRepository.save(n);
+        return "Saved";
     }
+
 }

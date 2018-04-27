@@ -172,6 +172,10 @@ Congratulations! You've just developed a RESTful web service with Spring.
 
     http://localhost:8080/greeting
 
+* Utils
+
+	https://spring.io/guides/gs/accessing-data-mysql/
+
 == See Also
 
 The following guides may also be helpful:
