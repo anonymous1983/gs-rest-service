@@ -162,7 +162,9 @@ Congratulations! You've just developed a RESTful web service with Spring.
 
 * Install
 
-    `mvn clean install
+    `mvn clean install`
+
+    `to skip test `mvn clean install -DskipTests`
 
 * Build
 
@@ -170,11 +172,11 @@ Congratulations! You've just developed a RESTful web service with Spring.
 
 * Start
 
-    http://localhost:8080/greeting
+    `http://localhost:8080/greeting`
 
 * Utils
 
-	https://spring.io/guides/gs/accessing-data-mysql/
+	`https://spring.io/guides/gs/accessing-data-mysql/`
 
 == See Also
 
