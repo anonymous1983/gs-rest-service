@@ -171,8 +171,24 @@ Congratulations! You've just developed a RESTful web service with Spring.
     `java -jar gs-rest-service-0.1.0.jar`
 
 * Start
+	
+	Statics : 
+    ```
+    cd statics/back
+    npm install // install packages
+    npm start
+    http://localhost:8081
+    ```
 
-    `http://localhost:8080/greeting`
+    Back : 
+    ```
+    cd back
+    npm install // install packages
+    npm start
+    http://localhost:4200
+    ```
+
+
 
 * Utils
 
