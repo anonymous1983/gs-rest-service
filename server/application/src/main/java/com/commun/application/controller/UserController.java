@@ -1,5 +1,7 @@
-package com.commun.application;
+package com.commun.application.controller;
 
+import com.commun.application.entity.User;
+import com.commun.application.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,6 +10,14 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     @Autowired
     private UserRepository userRepository;
+
+    @GetMapping(path = "/user") // Map ONLY GET Requests
+    public @ResponseBody
+    Iterable<User> getAllUsers() {
+        // @ResponseBody means the returned String is the response, not a view name
+        // @RequestParam means it is a parameter from the GET or POST request
+        return userRepository.findAll();
+    }
 
 
     @PostMapping(path = "/user") // Map ONLY GET Requests
@@ -28,20 +38,11 @@ public class UserController {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
 
-        User n = new User();
-        n.setName(user.getName());
-        n.setEmail(user.getEmail());
-        userRepository.save(n);
+        User u = new User();
+        u.setName(user.getName());
+        u.setEmail(user.getEmail());
+        userRepository.save(u);
         return "Saved";
-    }
-
-
-    @GetMapping(path = "/user") // Map ONLY GET Requests
-    public @ResponseBody
-    Iterable<User> getAllUsers() {
-        // @ResponseBody means the returned String is the response, not a view name
-        // @RequestParam means it is a parameter from the GET or POST request
-        return userRepository.findAll();
     }
 
 
