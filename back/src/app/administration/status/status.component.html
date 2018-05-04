@@ -1,0 +1,38 @@
+<nav aria-label="breadcrumb" class="mt-1">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/dashboard">Home</a></li>
+    <li class="breadcrumb-item">Administration</li>
+    <li class="breadcrumb-item active" aria-current="page">Status</li>
+  </ol>
+</nav>
+
+<div class="d-flex align-items-center justify-content-between p-3 my-3 text-white-50 bg-primary box-shadow">
+  <div class="clearfix">
+    <h6 class="mb-0 text-white">Status</h6>
+    <small>List</small>
+  </div>
+  <div class="clearfix">
+    <button class="btn btn-success"><i class="fas fa-plus fa-fw"></i> Add Status</button>
+  </div>
+</div>
+
+<div class="my-3 p-3">
+  <table class="table table-hover table-striped table-sm">
+    <thead>
+    <tr>
+      <th scope="col col-1">#</th>
+      <th scope="col col-3">Name</th>
+      <th scope="col col-7">Description</th>
+      <th scope="col col-1"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let status of statusList" class="align-middle">
+      <th scope="row" class="align-middle">{{status.id}}</th>
+      <td class="align-middle">{{status.name}}</td>
+      <td class="align-middle">{{status.description}}</td>
+      <td class="align-middle text-right"><button class="btn btn-sm btn-link" (click)="updateStatus(status.id)"><i class="fas fa-pencil-alt"></i></button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
