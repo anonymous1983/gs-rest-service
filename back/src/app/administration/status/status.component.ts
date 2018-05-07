@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 
 import {Status} from './status';
 import {StatusService} from './status.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-status',
@@ -12,8 +13,9 @@ import {StatusService} from './status.service';
 export class StatusComponent implements OnInit {
 
   public statusList: Status[];
+  public modalStatusObj: Status;
 
-  constructor(private statusService: StatusService) {
+  constructor(private statusService: StatusService, private modalService: NgbModal) {
   }
 
   ngOnInit() {
@@ -24,8 +26,10 @@ export class StatusComponent implements OnInit {
     this.statusService.getStatus().subscribe(data => this.statusList = data);
   }
 
-  updateStatus(id: number): void {
-    console.log(id);
+  updateStatus(status: Status, modalId): void {
+    this.modalStatusObj = status;
+    this.modalStatusObj['modalTitle'] = 'Update Status';
+    this.modalService.open(modalId, {centered: true, size: 'lg'});
   }
 
 }

@@ -19,15 +19,19 @@
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link" [routerLinkActive]="['active']" routerLink="/issue">
+            <a class="nav-link btn btn-sm btn-link text-left" [routerLinkActive]="['active']" routerLink="/issue">
               <i class="fas fa-bug fa-fw"></i> Issues
             </a>
           </li>
           <li [routerLinkActive]="['active']">
-            <a class="nav-link">
+            <a class="nav-link btn btn-sm btn-link text-left"
+               [routerLinkActive]="['active']"
+               (click)="isCollapsedAdministration = !isCollapsedAdministration"
+               [attr.aria-expanded]="!isCollapsedAdministration"
+               aria-controls="collapseadministration">
               <i class="fas fa-cogs fa-fw"></i> Administration
             </a>
-            <ul class="nav flex-colum ml-4" id="collapseadministration">
+            <ul class="nav flex-colum ml-4" id="collapseadministration" [ngbCollapse]="isCollapsedAdministration">
               <li class="nav-item">
                 <a class="nav-link" [routerLinkActive]="['active']" routerLink="/administration/status">
                   <i class="fas fa-tags fa-fw"></i> Status

@@ -29,10 +29,40 @@
     <tbody>
     <tr *ngFor="let status of statusList" class="align-middle">
       <th scope="row" class="align-middle">{{status.id}}</th>
-      <td class="align-middle">{{status.name}}</td>
+      <td class="align-middle" [style.color]="status.color">{{status.name}}</td>
       <td class="align-middle">{{status.description}}</td>
-      <td class="align-middle text-right"><button class="btn btn-sm btn-link" (click)="updateStatus(status.id)"><i class="fas fa-pencil-alt"></i></button></td>
+      <td class="align-middle text-right"><button class="btn btn-sm btn-link" (click)="updateStatus(status, modalStatus)"><i class="fas fa-pencil-alt"></i></button></td>
     </tr>
     </tbody>
   </table>
 </div>
+
+
+<ng-template #modalStatus let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">{{modalStatusObj.modalTitle}} &#123;&nbsp;<span [style.color]="modalStatusObj.color">{{modalStatusObj.name}}</span>&nbsp;&#125;</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="modalSolutionInputName">Name</label>
+        <input type="email" class="form-control" id="modalSolutionInputName" aria-describedby="nameHelp" placeholder="name" [(ngModel)]='modalStatusObj.name' name="name">
+      </div>
+      <div class="form-group">
+        <label for="modalSolutionInputDescription">Description</label>
+        <textarea class="form-control" id="modalSolutionInputDescription" rows="3" [(ngModel)]='modalStatusObj.description' name="description"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="modalSolutionInputColor">Color</label>
+        <input type="email" class="form-control" id="modalSolutionInputColor" aria-describedby="nameHelp" placeholder="name" [(ngModel)]='modalStatusObj.color' name="color" [style.color]="modalStatusObj.color">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>

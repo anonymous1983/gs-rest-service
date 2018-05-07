@@ -3,7 +3,13 @@ package com.commun.application.controller;
 import com.commun.application.entity.Status;
 import com.commun.application.repository.StatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -12,22 +18,34 @@ public class StatusController {
     @Autowired
     private StatusRepository statusRepository;
 
+    // -------------------Retrieve All Status
     @GetMapping(path = "/status")
     public @ResponseBody
     Iterable<Status> getAllStatus() {
         return statusRepository.findAll();
     }
 
+    // -------------------Retrieve Single Status
+    @GetMapping(path = "/status/{id}")
+    public @ResponseBody
+    Optional<Status> getStatus(@PathVariable("id") Integer id) {
+        return statusRepository.findById(id);
+    }
+
+    // -------------------Create a Status
     @PostMapping(path = "/status")
     public @ResponseBody
-    String addNewStatus(@RequestBody Status status){
+    ResponseEntity<?> addNewStatus(@RequestBody Status status, UriComponentsBuilder ucBuilder){
         Status s = new Status();
         s.setName(status.getName());
         s.setDescription(status.getDescription());
         s.setColor(status.getColor());
         s.setIcon(status.getIcon());
         statusRepository.save(s);
-        return "Saved";
+        //return "Saved";
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(ucBuilder.path("/status/{id}").buildAndExpand(status.getId()).toUri());
+        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
 
 
