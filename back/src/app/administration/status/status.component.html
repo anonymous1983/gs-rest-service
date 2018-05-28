@@ -12,7 +12,7 @@
     <small>List</small>
   </div>
   <div class="clearfix">
-    <button class="btn btn-success"><i class="fas fa-plus fa-fw"></i> Add Status</button>
+    <button class="btn btn-success" (click)="addStatus(modalStatus)"><i class="fas fa-plus fa-fw"></i> Add Status</button>
   </div>
 </div>
 
@@ -31,7 +31,9 @@
       <th scope="row" class="align-middle">{{status.id}}</th>
       <td class="align-middle" [style.color]="status.color">{{status.name}}</td>
       <td class="align-middle">{{status.description}}</td>
-      <td class="align-middle text-right"><button class="btn btn-sm btn-link" (click)="updateStatus(status, modalStatus)"><i class="fas fa-pencil-alt"></i></button></td>
+      <td class="align-middle text-right">
+        <button class="btn btn-sm btn-link" (click)="updateStatus(status, modalStatus)"><i class="fas fa-pencil-alt"></i></button>
+      </td>
     </tr>
     </tbody>
   </table>
@@ -59,10 +61,11 @@
         <label for="modalSolutionInputColor">Color</label>
         <input type="email" class="form-control" id="modalSolutionInputColor" aria-describedby="nameHelp" placeholder="name" [(ngModel)]='modalStatusObj.color' name="color" [style.color]="modalStatusObj.color">
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="c('Close click')">Close</button>
+    <button type="button" class="btn btn-light mr-auto" (click)="c('Close click')">Close</button>
+    <button type="submit" class="btn btn-primary">Submit</button>
   </div>
 </ng-template>

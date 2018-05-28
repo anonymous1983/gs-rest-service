@@ -8,7 +8,6 @@ import {AppRoutingModule} from './/app-routing.module';
 import {AppComponent} from './app.component';
 import {IssuesComponent} from './issues/issues.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
-import {StatusComponent} from './administration/status/status.component';
 
 
 @NgModule({
@@ -16,7 +15,6 @@ import {StatusComponent} from './administration/status/status.component';
     AppComponent,
     IssuesComponent,
     DashboardComponent,
-    StatusComponent,
   ],
   imports: [
     BrowserModule,

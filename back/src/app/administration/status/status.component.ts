@@ -32,4 +32,10 @@ export class StatusComponent implements OnInit {
     this.modalService.open(modalId, {centered: true, size: 'lg'});
   }
 
+  addStatus(modalId): void {
+    this.modalStatusObj['modalTitle'] = 'Add Status';
+    console.log(this.modalStatusObj);
+    this.modalService.open(modalId, {centered: true, size: 'lg'});
+  }
+
 }

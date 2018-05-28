@@ -1,20 +1,25 @@
 import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import {ExtraOptions, RouterModule, Routes} from '@angular/router';
 
 import {IssuesComponent} from './issues/issues.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
-import {StatusComponent} from './administration/status/status.component';
 
 
 const routes: Routes = [
   {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'issue', component: IssuesComponent},
-  {path: 'administration/status', component: StatusComponent}
+  {path: 'administration', loadChildren: 'app/administration/administration.module#AdministrationModule'},
+  {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+  {path: '**', redirectTo: 'dashboard'}
 ];
 
+const config: ExtraOptions = {
+  useHash: true,
+}
+
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, config)],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
