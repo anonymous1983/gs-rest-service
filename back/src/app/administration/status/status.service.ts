@@ -14,4 +14,12 @@ export class StatusService {
     return this.http.get<Status[]>('http://localhost:8090/api/v1/status');
   }
 
+  public addStatus(status: Status): Observable<any> {
+    return this.http.post('http://localhost:8090/api/v1/status', status);
+  }
+
+  public deleteStatus(id: number): Observable<any> {
+    return this.http.delete('http://localhost:8090/api/v1/status/' + id);
+  }
+
 }

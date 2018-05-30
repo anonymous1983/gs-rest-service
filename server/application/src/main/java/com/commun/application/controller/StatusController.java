@@ -32,10 +32,22 @@ public class StatusController {
         return statusRepository.findById(id);
     }
 
+    // -------------------Retrieve Single Status
+    @DeleteMapping(path = "/status/{id}")
+    public @ResponseBody
+    ResponseEntity<?> deleteStatus(@PathVariable("id") Integer id, UriComponentsBuilder ucBuilder) {
+        statusRepository.deleteById(id);
+        HttpHeaders headers = new HttpHeaders();
+        HttpStatus status = new HttpStatus();
+        headers.setLocation(ucBuilder.path("/status/{id}").buildAndExpand(id).toUri());
+        headers.set("id", id);
+        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+    }
+
     // -------------------Create a Status
     @PostMapping(path = "/status")
     public @ResponseBody
-    ResponseEntity<?> addNewStatus(@RequestBody Status status, UriComponentsBuilder ucBuilder){
+    ResponseEntity<?> addNewStatus(@RequestBody Status status, UriComponentsBuilder ucBuilder) {
         Status s = new Status();
         s.setName(status.getName());
         s.setDescription(status.getDescription());
